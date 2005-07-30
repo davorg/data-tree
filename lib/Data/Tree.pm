@@ -117,12 +117,11 @@ sub ancestors {
   my @ancestors;
   my $child = $self->{all}{$c};
 
-  while ($child->{parent}) {
-    push @ancestors, $self->{all}{$child->{parent}};
-    $child = $self->{all}{$child->{parent}};
-  }
+  if ($child->{parent}) {
+    return $self->{all}{$child->{parent}}, $self->ancestors($child->{parent});
+  } else {
 
-  return @ancestors;
+  }
 }
 
 sub level {
@@ -136,7 +135,6 @@ sub level {
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
